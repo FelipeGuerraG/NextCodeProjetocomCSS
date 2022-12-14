@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Final</title>
+    <style>
+       * {
+        margin: 0px;
+        padding: 0px;
+       } 
+
+       body{
+        width:100%;
+        height: 100vh;
+        background: linear-gradient(-45deg, #191970, #0000FF, #E0FFFF)
+       }
+
+       #entrar{
+        position:relative;
+        top: 50%;
+        left: 50%;
+        transform: translate( -50%, -50%);
+        background: #BEBEBE;
+        border-radius: 10px;
+        padding: 30px;
+        width: min-content;
+        align-items: center;
+       }
+
+       .input {
+        min-width: 200px;
+        border-radius: 22px;
+        border: 2px;
+       }
+    </style>
+</head>
+<body>
+    
+    <div id="entrar">
+    <h1>Advinhe!!</h1>
+    <input/>
+    <button>É O NÚMERO!</button>
+    </div>
+   
+    <script>
+        function sorteia() {
+            return Math.round(Math.random() * 10);
+        }
+
+        function criadornums(quant) {
+            var numsort = [];
+            var num = 1;
+            while( num <= quant) {
+                var numRandomico = sorteia();
+                var achou = false;
+                if(numRandomico !== 0) {
+                    for(var posicao = 0; posicao < numsort.length; posicao++) {
+                        if(numsort[posicao] == numRandomico) {
+                            achou = true;
+                            break;
+                        }
+                    }
+                    if(achou == false) {
+                        numsort.push(numRandomico);
+                        num++;
+                    } 
+                }
+                
+                
+            }
+            return numsort;
+        }
+
+        var numsort = criadornums(4);
+        console.log(numsort);
+
+        var input = document.querySelector("input");
+        input.focus();
+
+        function palpite() {
+            var find = false;
+            for (var posicao = 0; posicao < numsort.length; posicao++) {
+                if(input.value == numsort[posicao]) {
+                    alert("Parabéns, você ACERTOU!!");
+                    find = true;
+                    break;
+                }
+            }
+            if (find == false) {
+                alert("Errou!");
+            }
+            input.value = "";
+            input.focus();
+        }
+        var button = document.querySelector("button");
+        button.onclick = palpite;
+
+    </script>
+</body>
+</html>
